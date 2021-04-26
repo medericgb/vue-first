@@ -46,6 +46,7 @@
                 v-for="sauce in sauces"
                 @mouseover="updateImage(sauce.image)"
                 :key="sauce.id"
+                :style="{backgroundColor: sauce.color}"
               >
                 {{ sauce.type }}
               </li>
@@ -62,7 +63,13 @@
             </ul>
           </div>
           <!-- Ajouter à ma commande -->
-          <button v-on:click="addProduct()">Ajouter à ma commande</button>
+          <button
+            :class="{notActiveButton : notAvailable}"
+            v-on:click="addProduct()"
+            :disabled="notAvailable"
+          >
+            Ajouter à ma commande
+          </button>
         </div>
 
         <!-- Section Panier -->
@@ -91,12 +98,14 @@
               <tr>
                 <td>Total à payer</td>
                 <td>
-                  <div v-if="promo === 'royale' ">
-                    (-3$)
-                    <span class="sale">{{ totalPrice }}</span>
-                    {{ totalPrice - 3}} $
-                  </div>
-                  <div v-else>{{ totalPrice }} $</div>
+                  <transition name="bounce">
+                    <div v-if="promo === 'royale' ">
+                      (-3$)
+                      <span class="sale">{{ totalPrice }}</span>
+                      {{ totalPrice - 3}} $
+                    </div>
+                    <div v-else>{{ totalPrice }} $</div>
+                  </transition>
                 </td>
               </tr>
             </tbody>

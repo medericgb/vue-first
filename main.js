@@ -7,7 +7,7 @@ const app = Vue.createApp({
       price: 12,
       image: "assets/images/tomates.jpg",
       sale: true,
-      notAvailable: true,
+      notAvailable: false,
       ingredients: [
         "Olives",
         "Poulet roti",
