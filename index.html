@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Vue JS</title>
+    <!-- CSS -->
+    <link rel="stylesheet" href="assets/style.css" />
+  </head>
+  <body>
+    <div id="app">
+      <!-- Section du produit -->
+      <div class="product-section">
+        <!-- Image du produit -->
+        <div class="product-image">
+          <img :src="image" width="450" height="300" />
+        </div>
+        <!-- Details du produit -->
+        <div class="product-details">
+          <!-- Description du produit -->
+          <div class="product-description">
+            <h1>{{ title }}</h1>
+            <p v-show="notAvailable">Momentanément indisponible</p>
+            <p v-if="sale">
+              <span class="sale">{{ price }} $</span>
+              <span class="new-price">{{ price - 5}} $</span>
+            </p>
+            <p v-else>
+              <span class="price">{{ price }} $</span>
+            </p>
+          </div>
+          <br />
+          <!-- Ingrédients -->
+          <strong>Ingrédients</strong>
+          <div>
+            <span v-for="(ingredient, index) in ingredients" :key="index">
+              {{ ingredient + ", " }}
+            </span>
+          </div>
+          <br />
+          <!-- Sauces -->
+          <div class="sauces">
+            <strong>Sauce au choix</strong>
+            <ul>
+              <li
+                v-for="sauce in sauces"
+                @mouseover="updateImage(sauce.image)"
+                :key="sauce.id"
+              >
+                {{ sauce.type }}
+              </li>
+            </ul>
+          </div>
+          <br />
+          <!-- Valeurs nutritionnelles -->
+          <div>
+            <strong>Valeurs nutritionnelles pour 100 grammes</strong>
+            <ul>
+              <li v-for="(value, name, index) in energy" :key="index">
+                {{ name }}: {{ value }}
+              </li>
+            </ul>
+          </div>
+          <!-- Ajouter à ma commande -->
+          <button v-on:click="addProduct()">Ajouter à ma commande</button>
+        </div>
+
+        <!-- Section Panier -->
+        <div class="cart">
+          <table border="">
+            <thead>
+              <tr>
+                <th colspan="2">Votre commande</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>{{ name }}</td>
+                <td>x {{ nbProduct }}</td>
+              </tr>
+              <tr>
+                <td>Code promo</td>
+                <td>
+                  <input
+                    type="text"
+                    v-model="promo"
+                    placeholder="Ajouter un code promo"
+                  />
+                </td>
+              </tr>
+              <tr>
+                <td>Total à payer</td>
+                <td>
+                  <div v-if="promo === 'royale' ">
+                    (-3$)
+                    <span class="sale">{{ totalPrice }}</span>
+                    {{ totalPrice - 3}} $
+                  </div>
+                  <div v-else>{{ totalPrice }} $</div>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <!-- JS -->
+    <script src="https://unpkg.com/vue@next"></script>
+    <script src="main.js"></script>
+    <script>
+      const mountApp = app.mount("#app");
+    </script>
+  </body>
+</html>

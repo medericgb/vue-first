@@ -1,0 +1,33 @@
+@import url("https://fonts.googleapis.com/css2?family=Nunito&display=swap");
+
+:root {
+  font-family: Nunito;
+  /* Colors */
+  --red-color: red;
+  --gray-color: gray;
+}
+
+.product-section {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
+
+.product-details {
+  margin-left: 35px;
+  max-width: 480px;
+}
+
+.price {
+  color: var(--red-color);
+}
+
+.new-price {
+  color: var(--red-color);
+}
+
+.sale {
+  color: var(--gray-color);
+  margin-right: 10px;
+  text-decoration: line-through;
+}
